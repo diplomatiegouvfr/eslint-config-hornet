@@ -1,0 +1,4 @@
+{
+    "mocha/no-mocha-arrows": "off",
+    "mocha/no-setup-in-describe": "warn"
+}

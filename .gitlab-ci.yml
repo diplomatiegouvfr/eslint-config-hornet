@@ -1,0 +1,14 @@
+include:
+  project: "hornet.js/gitlab-ci/npm-package-ci"
+  file: "pipeline.yaml"
+
+variables:
+  QUALIFIED_GROUP: "fr.gouv.diplomatie.hornet"
+  CI_IMAGE_JFROG_CLI_NPM: "$CI_REGISTRY/docker-images/jfrog-npm:7.24.2-buster"
+  CI_IMAGE_NODE: "$CI_REGISTRY/docker-images/npm:7.24.2-buster"
+
+sonar:
+  allow_failure: true
+
+lint:
+  allow_failure: true

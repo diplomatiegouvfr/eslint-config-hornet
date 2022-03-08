@@ -1,0 +1,95 @@
+{
+    "name": "eslint-config-hornet",
+    "version": "1.0.0",
+    "description": "Eslint configuration pour les projets hornet",
+    "license": "CECILL-2.1",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/diplomatiegouvfr/eslint-config-hornet.git"
+    },
+    "bugs": {
+        "url": "https://github.com/diplomatiegouvfr/eslint-config-hornet/issues"
+    },
+    "main": "lib/index.js",
+    "files": [
+        "*.md",
+        "/lib/**/*.{js*,d.ts}",
+        "!/lib/test/**",
+        "!dependencies-report.json"
+    ],
+    "scripts": {
+        "------------------------------------------- CLEAN -----------------------------------------------------------------------------------------": "",
+        "clean": "run-p clean:lib clean:test clean:modules clean:lint",
+        "clean:lib": "rimraf ./lib",
+        "clean:lint": "rimraf ./linter_report",
+        "clean:modules": "rimraf ./node_modules",
+        "clean:test": "rimraf .nyc_output ./test_report",
+        "------------------------------------------- BUILD -----------------------------------------------------------------------------------------": "",
+        "prebuild": "npm run clean:lib",
+        "build": "export NODE_OPTIONS=--experimental-worker && npx tsc -p tsconfig.build.json",
+        "build:test": "export NODE_OPTIONS=--experimental-worker && npx tsc",
+        "------------------------------------------- PREPARE ------------------------------------------------------------------------------------------": "",
+        "prepare": "npm run build && husky install",
+        "------------------------------------------- LINT ------------------------------------------------------------------------------------------": "",
+        "lint": "npx eslint -c .eslintrc **/*.{js,ts,json,md} --output-file linter_report/eslint.json -f json",
+        "lint:fix": "npx eslint --cache --fix",
+        "lint:fix-all": "npx eslint --cache **/*.{js,ts,json,md} . --fix",
+        "------------------------------------------- TEST ------------------------------------------------------------------------------------------": "",
+        "pretest": "npm run build",
+        "test": "npm run test:coverage",
+        "test:coverage": "nyc --reporter=lcovonly --reporter=text --report-dir=./test_report/mocha/coverage npm run test:unit",
+        "test:unit": "mocha --timeout 20000 --reporter mocha-multi-reporters --reporter-options configFile=.mocha-reports.json -r tsconfig-paths/register -r source-map-support/register -r ts-node/register test/**/*.spec.ts",
+        "------------------------------------------- DELIVER ---------------------------------------------------------------------------------------": "",
+        "predeliver": "npm run build",
+        "deliver": ""
+    },
+    "dependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
+        "@typescript-eslint/parser": "^4.33.0",
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-airbnb-typescript": "^14.0.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-json": "^3.1.0",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-markdown": "^2.2.1",
+        "eslint-plugin-md": "^1.0.19",
+        "eslint-plugin-mocha": "^8.2.0",
+        "eslint-plugin-mocha-no-only": "^1.1.1",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-react": "^7.26.1",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-sonarjs": "^0.11.0",
+        "prettier": "^2.4.1"
+    },
+    "devDependencies": {
+        "@istanbuljs/nyc-config-typescript": "^1.0.2",
+        "@types/chai": "^4.3.0",
+        "@types/eslint": "^7.28.2",
+        "@types/mocha": "^9.0.0",
+        "@types/node": "^16.11.6",
+        "chai": "^4.3.4",
+        "husky": "^7.0.4",
+        "lint-staged": "^10.5.4",
+        "mocha": "^9.1.3",
+        "mocha-junit-reporter": "^2.0.2",
+        "mocha-multi-reporters": "^1.5.1",
+        "nyc": "^15.1.0",
+        "rimraf": "^3.0.2",
+        "source-map-support": "^0.5.21",
+        "ts-node": "^10.4.0",
+        "tsconfig-paths": "^3.12.0",
+        "typescript": "^4.5.3"
+    },
+    "keywords": [
+        "eslint",
+        "eslint-config",
+        "eslint-config-hornet",
+        "prettier",
+        "prettier-config"
+    ],
+    "lint-staged": {
+        "*.ts": "npm run lint:fix"
+    }
+}

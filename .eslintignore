@@ -1,0 +1,9 @@
+/lib
+/node_modules
+**/package*.json
+LICENSE.md
+istanbul
+tmpPublish
+test_report
+target
+linter_report

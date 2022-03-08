@@ -1,0 +1,20 @@
+node_modules
+**/node_modules
+.vscode
+.idea
+lib
+tmpPublish
+/test_report/
+/istanbul
+.nyc_out.json
+/.nyc_output
+target 
+
+# lint
+.eslintcache
+eslint.log
+linter_report
+
+*.js
+*.js.map
+*.tsbuildinfo

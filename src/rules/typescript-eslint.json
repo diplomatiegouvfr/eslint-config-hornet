@@ -1,0 +1,6 @@
+{
+    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-default-import": "off",
+    "@typescript-eslint/no-floating-promises": ["error", { "ignoreVoid": true }]
+}

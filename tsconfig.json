@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "importHelpers": true,
+        "module": "commonjs",
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "target": "es2017",
+        "sourceMap": true,
+        "outDir": "./lib",
+        "baseUrl": "./",
+        "incremental": false,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "types": [
+            "node",
+            "mocha",
+            "chai",
+        ]
+    },
+    "include": ["src", "src/**/*.json", "test"],
+    "exclude": ["istanbul"]
+}
+
